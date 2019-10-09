@@ -53,24 +53,24 @@ if __name__ == '__main__':
 
     sess = get_session(github_token)
 
-    pr_number = event_data["number"]
-    pr_src = pull_request["head"]["ref"]
-    pr_dst = pull_request["base"]["ref"]
-
-    print(f"*** Checking pull request #{pr_number}: {pr_src} ~> {pr_dst}")
     pr_data = sess.get(pull_request["url"]).json()
-
-    pr_title = pr_data["title"]
-    print(f"*** Title of PR is {pr_title!r}")
-    if pr_title.startswith("[WIP] "):
-        print("*** This is a WIP PR, will not merge")
-        neutral_exit()
-
     pr_user = pr_data["user"]["login"]
     print(f"*** This PR was opened by {pr_user}")
 
     if pr_user != "estensen":
         print("*** This PR was opened by somebody who isn't me; requires manual merge")
+        neutral_exit()
+
+    pr_number = event_data["number"]
+    pr_src = pull_request["head"]["ref"]
+    pr_dst = pull_request["base"]["ref"]
+
+    print(f"*** Checking pull request #{pr_number}: {pr_src} ~> {pr_dst}")
+
+    pr_title = pr_data["title"]
+    print(f"*** Title of PR is {pr_title!r}")
+    if pr_title.startswith("[WIP] "):
+        print("*** This is a WIP PR, will not merge")
         neutral_exit()
 
     print("*** This PR is ready to be merged.")
