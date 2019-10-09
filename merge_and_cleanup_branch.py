@@ -75,8 +75,7 @@ if __name__ == '__main__':
 
     print("*** This PR is ready to be merged.")
     merge_url = pull_request["url"] + "/merge"
-    r = sess.put(merge_url)
-    print(r)
+    sess.put(merge_url)
 
     print("*** Cleaning up PR branch")
     pr_ref = pr_data["head"]["ref"]
