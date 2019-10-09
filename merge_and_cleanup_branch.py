@@ -69,6 +69,10 @@ if __name__ == '__main__':
     pr_user = pr_data["user"]["login"]
     print(f"*** This PR was opened by {pr_user}")
 
+    if pr_user != "estensen":
+        print("*** This PR was opened by somebody who isn't me; requires manual merge")
+        neutral_exit()
+
     print("*** This PR is ready to be merged.")
     merge_url = pull_request["url"] + "/merge"
     sess.put(merge_url)
