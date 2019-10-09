@@ -73,7 +73,6 @@ if __name__ == '__main__':
         print("*** This is a WIP PR, will not merge")
         neutral_exit()
 
-    """
     print("*** This PR is ready to be merged.")
     merge_url = pull_request["url"] + "/merge"
     r = sess.put(merge_url)
@@ -84,4 +83,3 @@ if __name__ == '__main__':
     api_base_url = pr_data["base"]["repo"]["url"]
     ref_url = f"{api_base_url}/git/refs/heads/{pr_ref}"
     sess.delete(ref_url)
-    """
